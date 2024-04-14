@@ -1,1 +1,1 @@
-print("Hello there, this is our Claude API implementation")
+print("Hello there, this is our Hugging Face API implementation")
