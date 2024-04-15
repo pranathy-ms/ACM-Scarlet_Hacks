@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 from flask_cors import CORS
 import hugging_face
+import config
 
 app = Flask(__name__)
 CORS(app)  # This enables CORS for all domains on all routes. Consider tightening this for production!
@@ -52,7 +53,7 @@ def get_itinerary():
     ]
     origin = starting_location
     mode = 'driving'
-    api_key = 'AIzaSyCTMf0bJ6YHbUn-q91uJYUGO5ReVOxQKCM'  # Replace with your actual Google Maps API key
+    api_key = config.MAPS_API_KEY  # Replace with your actual Google Maps API key
     routes = []
 
     for destination in destinations:
