@@ -11,6 +11,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { APIService } from '../../services/api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { firstValueFrom, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class DashboardComponent implements OnInit {
   travelForm!: UntypedFormGroup;
+  outputText = '';
+  outputMap = '';
   constructor(private fb: FormBuilder, private apiService: APIService) {}
   ngOnInit() {
     this.travelForm = this.fb.group({
@@ -32,8 +35,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  handleSubmit() {
+  async handleSubmit() {
     console.log(this.travelForm?.value);
-    this.apiService.postApiData(this.travelForm.value);
+    try {
+      const { text, map } = (await firstValueFrom(
+        this.apiService.postApiData(this.travelForm.value)
+      )) as any;
+      this.outputText = text;
+      this.outputMap = map;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

@@ -35,7 +35,7 @@ def get_route(origin, destination, mode, key):
 def get_itinerary():
     data = request.get_json()
     starting_location = data["starting_location"]
-    number_of_places = data["number_of_places"]
+    number_of_places = str(data["number_of_places"])
     start_date_time = data["start_date_time"]
     types_of_places = data["types_of_places"]
 

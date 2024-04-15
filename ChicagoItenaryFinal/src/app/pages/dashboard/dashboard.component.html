@@ -36,20 +36,12 @@
         type="datetime-local"
         formControlName="date"
       />
-      <!-- <input
-        class="form-control"
-        placeholder="yyyy-mm-dd"
-        name="dp"
-        formControlName="date"
-        ngbDatepicker
-        #d="ngbDatepicker"
-      />
-      <button
-        class="btn btn-outline-secondary bi bi-calendar3"
-        (click)="d.toggle()"
-        type="button"
-      ></button> -->
     </div>
   </div>
 </div>
 <button class="btn btn-primary" (click)="handleSubmit()">Submit</button>
+
+<div class="output-container row">
+  <div class="text-output col-6" [innerHtml]="outputText">test</div>
+  <div class="map-output col-6" [innerHtml]="outputMap">test</div>
+</div>
