@@ -5,8 +5,13 @@ import config
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
 
+starting_location = "171 W Randolph St, Chicago"
+number_of_places = "4"
+start_date_time = "15th April 2024, 8:00 am"
+types_of_places = "restaurants and water bodies"
+
 # Define the input prompt
-prompt = "Given my location is 171 W Randolph St, Chicago, would you be able to provide me a sustainable, optimized travel plan given that I want to visit 4 places that are related to water bodies and vegetarian restaurants? Please give me only the list of location names in the order they need to be visited, without any description for them."
+prompt = "Given my location is "+starting_location+", would you be able to provide me a sustainable, optimized plan for places to visit given that I want to visit "+number_of_places+" places that are related to "+types_of_places+"? Please give me only the list of location names in the order they need to be visited, without any description for them."# I am planning to take this trip starting "+start_date_time+"."
 
 headers = {"Authorization": f"Bearer {config.API_KEY}"}
 
