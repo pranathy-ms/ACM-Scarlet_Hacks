@@ -21,7 +21,11 @@ def query(payload):
     # Check if the response is successful
     if response.status_code == 200:
         try:
-            return response.json()[0]['generated_text']
+            generated_output = response.json()[0]['generated_text']
+            lines = generated_output.split('\n')
+            places_list = [line.strip() for line in lines if line.strip().startswith(tuple([str(i) + '.' for i in range(1, 10)]))]
+            return places_list
+            #return response.json()[0]['generated_text']
         except Exception as e:
             print(f"Error parsing JSON: {e}")
             print(f"Response text: {response.text}")
@@ -31,20 +35,23 @@ def query(payload):
         return None
 
 # Increase token limit
-MAX_TOKENS = 5000  # Set your desired maximum number of tokens
-generated_output = query({"inputs": prompt, "max_length": MAX_TOKENS})
+# MAX_TOKENS = 5000  # Set your desired maximum number of tokens
+#generated_output = query({"inputs": prompt, "max_length": MAX_TOKENS})
+# print(query({"inputs": prompt, "max_length": MAX_TOKENS}))
 
 #print(generated_output)
 # Print the generated output without the original prompt
-print(generated_output.replace(prompt, "").strip())
-# Split the generated output by newline
-lines = generated_output.split('\n')
+# print(generated_output.replace(prompt, "").strip())
+# # Split the generated output by newline
+# lines = generated_output.split('\n')
 
-print("\nLines:")
-print(lines)
-places_list = [line.strip() for line in lines if line.strip().startswith(tuple([str(i) + '.' for i in range(1, 10)]))]
+# print("\nLines:")
+# print(lines)
+# places_list = [line.strip() for line in lines if line.strip().startswith(tuple([str(i) + '.' for i in range(1, 10)]))]
 
-print(places_list)
-# Print the extracted list of places
-for place in places_list:
-    print(place)
+# print("check for places")
+# print(places_list)
+
+# # Print the extracted list of places
+# for place in places_list:
+#     print(place)

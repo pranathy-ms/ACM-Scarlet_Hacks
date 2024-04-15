@@ -3,6 +3,7 @@ import googlemaps  # This line only needed if you use the googlemaps library
 from datetime import datetime
 import requests
 from flask_cors import CORS
+import hugging_face
 
 app = Flask(__name__)
 CORS(app)  # This enables CORS for all domains on all routes. Consider tightening this for production!
@@ -29,15 +30,27 @@ def get_route(origin, destination, mode, key):
     else:
         return {'status': 'error', 'message': 'Failed to retrieve directions'}
 
-@app.route('/get-itinerary')
+@app.route('/get-itinerary', methods=['POST'])
 def get_itinerary():
+    data = request.get_json()
+    starting_location = data["starting_location"]
+    number_of_places = data["number_of_places"]
+    start_date_time = data["start_date_time"]
+    types_of_places = data["types_of_places"]
+
+
+    # Define the input prompt
+    prompt = "Given my location is "+starting_location+", would you be able to provide me a sustainable, optimized plan for places to visit given that I want to visit "+number_of_places+" places that are related to "+types_of_places+"? Please give me only the list of location names in the order they need to be visited, without any description for them."# I am planning to take this trip starting "+start_date_time+"."
+    MAX_TOKENS = 5000 
+
+    hugging_face.query({"inputs": prompt, "max_length": MAX_TOKENS})
     destinations = [
         "Navy Pier, Chicago, IL",
         "Lincoln Park Zoo, Chicago, IL",
         "The Plant Chicago, Chicago, IL",
         "Green Street Smoothie Co, Chicago, IL"
     ]
-    origin = "171 W Randolph St, Chicago, IL"
+    origin = starting_location
     mode = 'driving'
     api_key = 'AIzaSyCTMf0bJ6YHbUn-q91uJYUGO5ReVOxQKCM'  # Replace with your actual Google Maps API key
     routes = []
