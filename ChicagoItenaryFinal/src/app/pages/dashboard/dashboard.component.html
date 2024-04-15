@@ -1,47 +1,55 @@
-<div class="center-div">
-<div class="form-floating mb-3">
-  <input
-    type="text"
-    class="form-control"
-    id="floatingInput"
-    placeholder="chicago"
-  />
-  <label for="floatingInput">From</label>
+<div [formGroup]="travelForm">
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingInput"
+      placeholder="chicago"
+      formControlName="from"
+    />
+    <label for="floatingInput">From</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingPassword"
+      placeholder="Password"
+      formControlName="typeOfPlace"
+    />
+    <label for="floatingPassword">Type of place</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input
+      type="number"
+      class="form-control"
+      id="floatingPassword"
+      placeholder="1... 2... 3..."
+      formControlName="numberOfPlaces"
+    />
+    <label for="floatingPassword">Number of places</label>
+  </div>
+  <div class="col-12">
+    <div class="input-group">
+      <input
+        class="form-control"
+        type="datetime-local"
+        formControlName="date"
+      />
+      <!-- <input
+        class="form-control"
+        placeholder="yyyy-mm-dd"
+        name="dp"
+        formControlName="date"
+        ngbDatepicker
+        #d="ngbDatepicker"
+      />
+      <button
+        class="btn btn-outline-secondary bi bi-calendar3"
+        (click)="d.toggle()"
+        type="button"
+      ></button> -->
+    </div>
+  </div>
 </div>
-</div>
-
-<div class="center-div">
-<div class="form-floating mb-3">
-  <input
-    type="text"
-    class="form-control"
-    id="floatingPassword"
-    placeholder="Password"
-  />
-  <label for="floatingPassword">Type of place</label>
-</div>
-</div>
-
-<div class="center-div">
-<div class="form-floating mb-3">
-  <input
-    type="number"
-    class="form-control"
-    id="floatingPassword"
-    placeholder="Password"
-  />
-  <label for="floatingPassword">Number of places</label>
-</div>
-</div>
-
-<div class="center-div">
-<div class="form-floating">
-  <input
-    type="datetime"
-    class="form-control"
-    id="floatingPassword"
-    placeholder="Password"
-  />
-  <label for="floatingPassword">Date</label>
-</div>
-</div>
+<button class="btn btn-primary" (click)="handleSubmit()">Submit</button>
